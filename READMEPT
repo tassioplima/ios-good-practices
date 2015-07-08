@@ -1,21 +1,21 @@
 
-iOS Good Practices
+Boas Práticas em iOS 
 ==================
 
-_Just like software, this document will rot unless we take care of it. We encourage everyone to help us on that – just open an issue or send a pull request!_
+_Assim como o software, este documento vai ficar ultrapassado se não tomarmos cuidado. Nos estimulamos que todos nos ajude com isso – Basta apenas abrir uma questão ou enviar um pull request!_
 
-Interested in other mobile platforms? Our [Best Practices in Android Development][android-best-practices] and [Windows App Development Best Practices][windows-app-development-best-practices] documents have got you covered.
+Interessado em outras plataformas mobile? Nossas [Melhores praticas para desenvolvimento Android][android-best-practices] e [Melhores praticas para desenvolvimento de aplicativos Windows][windows-app-development-best-practices].
 
 [android-best-practices]: https://github.com/futurice/android-best-practices
 [windows-app-development-best-practices]: https://github.com/futurice/windows-app-development-best-practices
 
-## Why?
+## Por quê?
 
-Getting on board with iOS can be intimidating. Neither Swift nor Objective-C are widely used elsewhere, the platform has its own names for almost everything, and it's a bumpy road for your code to actually make it onto a physical device. This living document is here to help you, whether you're taking your first steps in Cocoaland or you're curious about doing things "the right way". Everything below is just suggestions, so if you have a good reason to do something differently, by all means go for it!
+Começar com iOS pode ser intimidador. Nem Swift, nem Objective-C são amplamente utilizados em outros lugares, a plataforma tem seus próprios nomes para quase tudo, e é uma estrada "esburacada" para seu próprio código, efetivamente para fazê-lo em um dispositivo físico. Este documento existente ira ajuda-lo, se você esta dando os primeiros passos dentro do Cocoaland ou esta curioso sobre como fazer as coisas da "maneira certa". Tudo abaixo são apenas sugestões, então se voce tiver alguma razão para fazer algo diferente por outros meios, vá em frente!
 
-## Contents
+## Conteúdo
 
-If you are looking for something specific, you can jump right into the relevant section from here.
+Se você está procurando algo específico, você pode ir ate as seções relevantes adiante.
 
 1. [Getting Started](#getting-started)
 1. [Common Libraries](#common-libraries)
@@ -30,73 +30,73 @@ If you are looking for something specific, you can jump right into the relevant 
 1. [In-App Purchases (IAP)](#in-app-purchases-iap)
 1. [License](#license)
 
-## Getting Started
+## Começando
 
 ### Xcode
 
-[Xcode][xcode] is the IDE of choice for most iOS developers, and the only one officially supported by Apple. There are some alternatives, of which [AppCode][appcode] is arguably the most famous, but unless you're already a seasoned iOS person, go with Xcode. Despite its shortcomings, it's actually quite usable nowadays!
+[Xcode][xcode] É uma IDE utilizada pelos desenvolvedores iOS, e é a unica oficialmente suportada pela Apple. Existe algumas alternativas, da qual [AppCode][appcode] é indiscutivelmente a mais famosa, mas ao menos que você seja uma pessoas experiente em iOS, use Xcode. apesar das suas deficiências, ele é realmente muito útil nos dias de hoje!
 
-To install, simply download [Xcode on the Mac App Store][xcode-app-store]. It comes with the newest SDK and simulators, and you can install more stuff under _Preferences > Downloads_.
+Para instalar, faça o download [Xcode no Mac App Store][xcode-app-store]. Ele vem com a mais nova SDK e simulador, e você pode instalar mais materiais em ->Preferences -> Downloads.
 
 [xcode]: https://developer.apple.com/xcode/
 [appcode]: https://www.jetbrains.com/objc/
 [xcode-app-store]: https://itunes.apple.com/us/app/xcode/id497799835
 
-### Project Setup
+### Setup do projeto
 
-A common question when beginning an iOS project is whether to write all views in code or use Interface Builder with Storyboards or XIB files. Both are known to occasionally result in working software. However, there are a few considerations:
+Uma questão comum quando começamos um projeto no iOS se é para escrever todos os códigos na View ou na Interface Builder com Storyboards ou XIB files. Ambos são conhecidos por ocasionalmente resultar no funcionamento do código. Contudo, há algumas considerações:
 
-#### Why code?
-* Storyboards are more prone to version conflicts due to their complex XML structure. This makes merging much harder than with code.
-* It's easier to structure and reuse views in code, thereby keeping your codebase [DRY][dry].
-* All information is in one place. In Interface Builder you have to click through all the inspectors to find what you're looking for.
+#### Por quê código?
+* Storyboards são mais propensos a conflitos de versão devido a sua complexa estrutura XML. Isso torna o merging mais difícil com o código.
+* Ele é mais fácil de estruturar e reusar os códigos na view, mantendo assim seu codebase [DRY][dry].
+* Todas informações estão em um lugar. Na Interface Builder você tem que clicar através de todos os inspectors para encontrar o que você está procurando.
 
 [dry]: http://en.wikipedia.org/wiki/Don%27t_repeat_yourself
 
-#### Why Storyboards?
-* For the less technically inclined, Storyboards can be a great way to contribute to the project directly, e.g. by tweaking colors or layout constraints. However, this requires a working project setup and some time to learn the basics.
-* Iteration is often faster since you can preview certain changes without building the project.
-* In Xcode 6, custom fonts and UI elements are finally represented visually in Storyboards, giving you a much better idea of the final appearance while designing.
-* Starting with iOS 8, [Size Classes][size-classes] allow you to design for different device types and screens without duplication.
+#### Por quê Storyboards?
+* Para os leigos tecnicos, Storyboard pode ser uma ótima maneira de contribuir diretamente para o projeto, e.g. para ajustes de cores ou restrições de layout. Entretanto, isso requer uma configuração do projeto de trabalho e algum tempo para aprender o básico.
+* Interação é muitas vezes mais rápido, pois você pode visualizar certas mudanças sem a construção do projeto.
+* No Xcode 6, fontes personalizadas e elementos UI são finalmente representadas visualmente no Storyboards, dando à você uma ideia melhor da aparência final enquanto desenha.
+* Começando com iOS 8, [Classes de tamanho][size-classes] permite você desenhar para diferentes tipos de dispositivos e telas sem duplicação.
 
 [size-classes]: http://blog.futurice.com/adaptive-view-ios8
 
 ### Ignores
 
-A good first step when putting a project under version control is to have a decent `.gitignore` file. That way, unwanted files (user settings, temporary files, etc.) will never even make it into your repository. Luckily, GitHub has us covered for both [Objective-C][objc-gitignore] and [Swift][swift-gitignore].
+Um bom primeiro passo ao colocar um projeto sob controle de versão é ter um decente arquivo ".gitignore". Dessa maneira, arquivos indesejáveis (definições de usuários, arquivos temporários, etc.) nunca farão parte do seu repositório. Felizmente, GitHub cobriu [Objective-C][objc-gitignore] e [Swift][swift-gitignore].
 
 [objc-gitignore]: https://github.com/github/gitignore/blob/master/Objective-C.gitignore
 [swift-gitignore]: https://github.com/github/gitignore/blob/master/Swift.gitignore
 
 ### CocoaPods
 
-If you're planning on including external dependencies (e.g. third-party libraries) in your project, [CocoaPods][cocoapods] offers easy and fast integration. Install it like so:
+Se você está planejando incluir dependências externas (e.g. third-party libraries) em seu projeto, [CocoaPods][cocoapods] oferece uma rápida e fácil integração. Instale no terminal:
 
     sudo gem install cocoapods
 
-To get started, move inside your iOS project folder and run
+Para começar, mova dentro da sua pasta de projeto de iOS e rode.
 
     pod init
 
-This creates a Podfile, which will hold all your dependencies in one place. After adding your dependencies to the Podfile, you run
+Isso cria um Podfile, que vai realizar todas as suas dependências em um só lugar. Depois de adicionar suas dependências no Podfile, você roda
 
     pod install
 
-to install the libraries and include them as part of a workspace which also holds your own project. It is generally [recommended to commit the installed dependencies to your own repo][committing-pods], instead of relying on having each developer running `pod install` after a fresh checkout.
+Para instalar as libraries e inclui-las como parte do seu workspace que também detem do seu próprio projeto. Ele é geralmente [recomendado para comitar a instalação da dependência do seu próprio repositório][committing-pods], em vez de confiar e ter cada desenvolvedor rodando "pod install" depois de um novo check-out.
 
-Note that from now on, you'll need to open the `.xcworkspace` file instead of `.xcproject`, or your code will not compile. The command
+Note que apartir de agora, você vai precisar abrir o ".xcworkspace" em vez de ".xcproject", ou seu código não será compilado. O comando
 
     pod update
 
-will update all pods to the newest versions permitted by the Podfile. You can use a wealth of [operators][cocoapods-pod-syntax] to specify your exact version requirements.
+Aualizará todos os pods para as versões mais recentes permitidas pelo Podfile . Você pode usar uma grande variadades [Operadores][cocoapods-pod-syntax] para especificar seu requerimento de versão.
 
 [cocoapods]: http://www.cocoapods.org
 [cocoapods-pod-syntax]: http://guides.cocoapods.org/syntax/podfile.html#pod
 [committing-pods]: https://www.dzombak.com/blog/2014/03/including-pods-in-source-control.html
 
-### Project Structure
+### Estrutura de projeto
 
-To keep all those hundreds of source files ending up in the same directory, it's a good idea to set up some folder structure depending on your architecture. For instance, you can use the following:
+Para manter todas aquelas centenas de arquivos de origem terminando no mesmo diretório, É uma boa ideia para configurar algumas estruturas de pastas que depende da sua arquitetura. Por exemplo, você pode usar a seguir:
 
     ├─ Models
     ├─ Views
@@ -104,17 +104,17 @@ To keep all those hundreds of source files ending up in the same directory, it's
     ├─ Stores
     ├─ Helpers
 
-First, create them as groups (little yellow "folders") within the group with your project's name in Xcode's Project Navigator. Then, for each of the groups, link them to an actual directory in your project path by opening their File Inspector on the right, hitting the little gray folder icon, and creating a new subfolder with the name of the group in your project directory.
+Primeiro, cria-los como grupos (amarelo claro "folders") dentro do grupo com o nome do seu projeto no Project Navigator do Xcode. Então , para cada um dos grupos, liga-lo a um diretório atual no caminho do seu projeto barindo o File Inspector a direita, clicando no icone da pasta em cinza claro, e criando um novo subfolder com o nome do grupo em seu diretório do projeto.
 
-#### Localization
+#### Localização
 
-Keep all user strings in localization files right from the beginning. This is good not only for translations, but also for finding user-facing text quickly. You can add a launch argument to your build scheme to launch the app in a certain language, e.g.
+Mantenha todas as strings dos usuários em arquivos de localização desde o início. Isso é bom não só para traduções, mas também para descobrir textos rapidamente voltados para usuário. Você pode adicionar um argumento de inicio para o seu esquema de compilação para iniciar o aplicativo em uma determinada línguagem ,e.g.
 
-    -AppleLanguages (Finnish)
+    -Linguagens da Apple (Finnish)
 
-For more complex translations such as plural forms that depending on a number of items (e.g. "1 person" vs. "3 people"), you should use the [`.stringsdict` format][stringsdict-format] instead of a regular `localizable.strings` file. As soon as you've wrapped your head around the crazy syntax, you have a powerful tool that knows how to make plurals for "one", some", "few" and "many" items, as needed [e.g. in Russian or Arabic][language-plural-rules].
+Para traduções mais complexas, tais como formas plurais que , dependendo do número de itens(e.g. "1 pessoa" vs. "3 pessoas"), você deve usar o [".stringsdict" format][stringsdict-format] em vez de um arquivo regular "localizable.strings". Assim que você tem em volta da sua head uma syntax louca, você tem um acessório poderoso que sabe como fazer plurais para "uns", "umas", "poucos" e "muitos" itens, como necessário [e.g. in Russian or Arabic][language-plural-rules].
 
-Find more information about localization in [these presentation slides][l10n-slides] from the February 2012 HelsinkiOS meetup. Most of the talk is still relevant in October 2014.
+Encontre mais informações sobre localização em [Estas representações de slides][l10n-slides] de fevereiro de 2012 HelsinkiOS meetup. A maior parte da conversa ainda é relevante em Outobro de 2014.
 
 [stringsdict-format]: https://developer.apple.com/library/prerelease/ios/documentation/MacOSX/Conceptual/BPInternational/StringsdictFileFormat/StringsdictFileFormat.html
 [language-plural-rules]: http://www.unicode.org/cldr/charts/latest/supplemental/language_plural_rules.html
@@ -122,19 +122,20 @@ Find more information about localization in [these presentation slides][l10n-sli
 
 #### Constants
 
-Keep app-wide constants in a `Constants.h` file that is included in the prefix header.
+Mantenha as constantes no app-wide "Constants.h" arquivo será  incluído no cabeçalho dos prefix.
+.
 
-Instead of preprocessor macro definitions (via `#define`), use actual constants:
+Em vez de definições de macro pré-processados(via "#define"), use a actual constant:
 
     static CGFloat const XYZBrandingFontSizeSmall = 12.0f;
     static NSString * const XYZAwesomenessDeliveredNotificationName = @"foo";
 
-Actual constants are type-safe, have more explicit scope (they’re not available in all imported/included files until undefined), cannot be redefined or undefined in later parts of the code, and are available in the debugger.
+Actual constants são de tipo seguro, tem um escopo mais explicito (they’re not available in all imported/included files until undefined), não pode ser redefinido ou indefinido em partes posteriores do código, e estão disponíveis no debugger.
 
 
-### Branching Model
+### Modelo de Branching
 
-Especially when distributing an app to the public (e.g. through the App Store), it's a good idea to isolate releases to their own branch with proper tags. Also, feature work that involves a lot of commits should be done on its own branch. [`git-flow`][gitflow-github] is a tool that helps you follow these conventions. It is simply a convenience wrapper around Git's branching and tagging commands, but can help maintain a proper branching structure especially for teams. Do all development on feature branches (or on `develop` for smaller work), tag releases with the app version, and commit to master only via
+Especialmente quando a distribuição de um aplicativo para público(e.g. through the App Store), é uma boa ideia para isolar o inicio da sua própria branch com marcas próprias.Também, a caracteristica do trabalho envolve uma serie de commits que fazem parte da sua própria branch . ["git-flow"][gitflow-github] é uma ferramenta para auxiliar você nestas convenções. Ele é uma simples vantagem ao redor da branching em comandos de marcação do Git, mas pode ajudar a manter uma branching própria e estruturada especialmente para equipes. Fazer todo o desenvolvimento em função das branches (ou em "develop" para um pequeno trabalho), para iniciar marcação com versões do app, e comitar para master é somente via
 
     git flow release finish <version>
 
@@ -142,42 +143,43 @@ Especially when distributing an app to the public (e.g. through the App Store), 
 
 ## Common Libraries
 
-Generally speaking, make it a conscious decision to add an external dependency to your project. Sure, this one neat library solves your problem now, but maybe later gets stuck in maintenance limbo, with the next OS version that breaks everything being just around the corner. Another scenario is that a feature only achievable with external libraries suddenly becomes part of the official APIs. In a well-designed codebase, switching out the implementation is a small effort that pays off quickly. Always consider solving the problem using Apple's extensive (and mostly excellent) frameworks first!
+Geralmente falando, faça disso uma decisão conciente para adicionar uma depenência externa para seu próprio projeto. Certamente, essa agradável library resolverá seus problemas por agora, mas talvez depois ficará preso na manutenção do limbo, com a próxima versão do OS . Outro cenário que é um recurso só alcançável com bibliotecas externas que de repente se tornam parte da API oficial. Em um codebase bem concebido,alternando a implementação é uma pequeno esforço que é rapidamente compensado. Sempre considere resolver o problema usando a extensão da Apple (e principalemente excelente) primeiro frameworks!
 
-Therefore this section has been deliberately kept rather short. The libraries featured here tend to reduce boilerplate code (e.g. Auto Layout) or solve complex problems that require extensive testing, such as date calculations. As you become more proficient with iOS, be sure to dive into the source here and there, and acquaint yourself with their underlying Apple frameworks. You'll find that those alone can do a lot of the heavy lifting.
+Portanto essa sessão foi deliberadamente mantida curta. As libraries caracterizadas tendem a reduzir um código clichê  (e.g. Auto Layout) ou resolver um problema complexo que requer testes extensivos, tal como calculo de datas. Para se tornar mais proeficiente com iOS, certifique-se em manter a fonte aqui e ali, e familiarizar-se com o básico do Framework da Apple. Você vai descobrir que esses sozinho podem fazer muito do trabalho pesado.
 
 ### AFNetworking
 
-A perceived 99.95 percent of iOS developers use this network library. While `NSURLSession` is surprisingly powerful by itself, [AFNetworking][afnetworking-github] remains unbeaten when it comes to actually managing a queue of requests, which is pretty much a requirement in any modern app.
+Uma porcentagem de 99.95% de desenvolvedores iOS usam essa library de network . Enquanto "NSURLSession" é surpreendentemente potente por si só, [AFNetworking][afnetworking-github] permanece imbativel quando se trata de uma ferramente de gerenciar fila de pedidos, que é praticamente uma exigência em qualquer app moderno.
 
 [afnetworking-github]: https://github.com/AFNetworking/AFNetworking
 
 ### DateTools
-As a general rule, [don't write your date calculations yourself][timezones-youtube]. Luckily, in [DateTools][datetools-github] you get an MIT-licensed, thoroughly tested library that covers pretty much all your calendary needs.
+Como uma regra geral, [Não escreva você mesmo sua calculação de data][timezones-youtube]. Felizmente, no [DateTools][datetools-github] você obtém uma licenciatura MIT, biblioteca exaustivamente testada que cobre praticamente todas as suas necessidades do calendary.
 
 [timezones-youtube]: https://www.youtube.com/watch?v=-5wpm-gesOY
 [datetools-github]: https://github.com/MatthewYork/DateTools
 
 ### Auto Layout Libraries
-If you prefer to write your views in code, chances are you've met either of Apple's awkward syntaxes – the regular 'NSLayoutConstraint' factory or the so-called [Visual Format Language][visual-format-language]. The former is extremely verbose and the latter based on strings, which effectively prevents compile-time checking.
+Se você prefere escrever suas views no código, provavelmente você já conheceu provavelmente, você já conheceu ou de sintaxes estranhas da Apple – o regular 'NSLayoutConstraint' fabric ou a layer [Visual Format Language][visual-format-language]. O primeiro é extremamente detalhado e este último baseado em strings, que efetivamente impede de compilar
+-time checking.
 
-[Masonry][masonry-github] remedies this by introducing its own DSL to make, update and replace constraints. A similar approach for Swift is taken by [Cartography][cartography-github], which builds on the language's powerful operator overloading features. For the more conservative, [FLKAutoLayout][flkautolayout-github] offers a clean, but rather non-magical wrapper around the native APIs.
+[Masonry][masonry-github] Recurso para introdução da própria DSL para fazer, atualizar e repor restrições. Uma abordagem semelhante para o swift é tomado por [Cartography][cartography-github], O qual baseia-se em poderosos recursos de sobrecarga de um operador da linguagem. Para os mais conservadores, [FLKAutoLayout][flkautolayout-github] oferece um limpo, mas em vez de empacotador non-magic em volta das APIs nativas.
 
 [visual-format-language]: https://developer.apple.com/library/ios/documentation/userexperience/conceptual/AutolayoutPG/VisualFormatLanguage/VisualFormatLanguage.html#//apple_ref/doc/uid/TP40010853-CH3-SW1
 [masonry-github]: https://www.github.com/Masonry/Masonry
 [cartography-github]: https://github.com/robb/Cartography
 [flkautolayout-github]: https://github.com/floriankugler/FLKAutoLayout
 
-## Architecture
+## Architecture (Arquitetura)
 
 * [Model-View-Controller-Store (MVCS)][mvcs]
-    * This is the default Apple architecture (MVC), extended by a Store layer that vends Model instances and handles the networking, caching etc.
-    * Every Store exposes to the view controllers either `RACSignal`s or `void`-returning methods with custom completion blocks
+    * Essa é uma arquitetura padrão da Apple (MVC), prorrogado por uma store layer e lida com o trabalho em rede, armazenamento em cache etc.
+    * Cada Store expõe a uma view controller `RACSignal`s ou `void`- retornando metodos personalizados com realização de blocos.
 * [Model-View-ViewModel (MVVM)][mvvm]
-    * Motivated by "massive view controllers": MVVM considers `UIViewController` subclasses part of the View and keeps them slim by maintaining all state in the ViewModel
-    * Quite new concept for Cocoa developers, but [gaining][cocoasamurai-rac] [traction][raywenderlich-mvvm]
+    * Motivado por "massive view controllers": MVVM considera `UIViewController` uma subclasse que parte da View que vem mantendo pequeno em todo o estado da View Model
+    * Conceito muito novo para desenvolvedores Cocoa , [ganho][cocoasamurai-rac] [tração][raywenderlich-mvvm]
 * [View-Interactor-Presenter-Entity-Routing (VIPER)][viper]
-    * Rather exotic architecture that might be worth looking into in larger projects, where even MVVM feels too cluttered and testability is a major concern
+    * Uma arquitetura um pouco exótica que pode valer a pena olhar em um projetos de maior dimensão, onde mesmo o MVVM se sente confuso como uma das principais preocupações.
 
 [mvcs]: http://programmers.stackexchange.com/questions/184396/mvcs-model-view-controller-store
 [mvvm]: http://www.objc.io/issue-13/mvvm.html
@@ -185,36 +187,36 @@ If you prefer to write your views in code, chances are you've met either of Appl
 [raywenderlich-mvvm]: http://www.raywenderlich.com/74106/mvvm-tutorial-with-reactivecocoa-part-1
 [viper]: http://www.objc.io/issue-13/viper.html
 
-### “Event” Patterns
+### “Eventos” Patterns
 
-These are the idiomatic ways for components to notify others about things:
+Estas são as formas idiomáticas para componentes notificarem outras coisas:
 
-* __Delegation:__ _(one-to-one)_ Apple uses this a lot (some would say, too much). Use when you want to communicate stuff back e.g. from a modal view.
-* __Callback blocks:__ _(one-to-one)_ Allow for a more loose coupling, while keeping related code sections close to each other. Also scales better than delegation when there are many senders.
-* __Notification Center:__ _(one-to-many)_ Possibly the most common way for objects to emit “events” to multiple observers. Very loose coupling — notifications can even be observed globally without reference to the dispatching object.
-* __Key-Value Observing (KVO):__ _(one-to-many)_ Does not require the observed object to explicitly “emit events” as long as it is _Key-Value Coding (KVC)_ compliant for the observed keys (properties). Usually not recommended due to its implicit nature and the cumbersome standard library API.
-* __Signals:__ _(one-to-many)_ The centerpiece of [ReactiveCocoa][reactivecocoa-github], they allow chaining and combining to your heart's content, thereby offering a way out of [callback hell][elm-escape-from-callback-hell].
+* __Delegation:__ _(um-para-um)_ Apple usa muito isso (alguns diriam, até demais). Use quando você quiser se comunicar com as coisas em volta e.g. da modal view.
+* __Callback blocks:__ _(um-para-um)_ Permitir para mais um acoplamento fraco, while keeping related code sections close to each other. Also scales better than delegation when there are many senders.
+* __Notification Center:__ _(um-para-muitos)_ Possivelmente a forma mais comum de objetos emitirem "eventos" para vários observadores. União muito solta — notificações podem até ser observadas globalmente sem referência ao objeto despachante.
+* __Key-Value Observing (KVO):__ _(um-para-muitos)_ Não exige que o objeto seja observado explicitamente na "emitir eventos" desde que ele seja _Key-Value Coding (KVC)_ compatível para chaves observadas (propriedades). Geralmente não é recomendado devido a sua natureza implícita da biblioteca padrão da API.
+* __Signals:__ _(um-para-muitos)_ A peça central do [ReactiveCocoa][reactivecocoa-github], Eles permitem que o encadeamento combine com o conteúdo do centro, oferecendo assim uma saída para [callback hell][elm-escape-from-callback-hell].
 
 [elm-escape-from-callback-hell]: http://elm-lang.org/learn/Escape-from-Callback-Hell.elm
 
-### Models
+### Modelos
 
-Keep your models immutable, and use them to translate the remote API's semantics and types to your app. Github's [Mantle](https://github.com/Mantle/Mantle) is a good choice.
+Mantém seus modelos imutáveis, e o usa para traduzir API'S semânticas remotas para seu app. Github  [Mantle](https://github.com/Mantle/Mantle) é uma boa escolha.
 
 ### Views
 
-When laying out your views using Auto Layout, be sure to add the following to your class:
+Quando colocar para fora seu ponto de vista usando o Auto Layout, não se esqueça de adicionar a seguinte sintax à sua classe:
 
     + (BOOL)requiresConstraintBasedLayout
     {
         return YES;
     }
 
-Otherwise you may encounter strange bugs when the system doesn't call `-updateConstraints` as you would expect it to.
+Caso contrário você encontrará estranhos bugs quando o sistema não chamar  "-updateConstraints" como seria de se esperar.
 
-### Controllers
+### Controllers 
 
-Use dependency injection, i.e. pass any required objects in as parameters, instead of keeping all state around in singletons. The latter is okay only if the state _really_ is global.
+Use a injeção de depedência, i.e. passe todos os objetos necessários com parâmetros, em vez de manter todo o estado em torno do singletons. The latter is okay only if the state _really_ is global.
 
 ```objective-c
 + [[FooDetailsViewController alloc] initWithFoo:(Foo *)foo];
@@ -222,7 +224,7 @@ Use dependency injection, i.e. pass any required objects in as parameters, inste
 
 ## Networking
 
-### Traditional way: Use custom callback blocks
+### Caminho tradicional: Use callback de blocos personalizados 
 
 ```objective-c
 // GigStore.h
@@ -244,13 +246,13 @@ typedef void (^FetchGigsBlock)(NSArray *gigs, NSError *error);
 ];
 ```
 
-This works, but can quickly lead to callback hell if you need to chain multiple requests.
+Isso funciona, mas pode levar rapidamente a um callback infernal se você precisar de várias cadeias de solicitações.
 
-### Reactive way: Use RAC signals
+### Forma reativa: Use sinais RAC (Reactive Cocoa)
 
-If you find yourself in callback hell, have a look at [ReactiveCocoa (RAC)][reactivecocoa-github]. It's a versatile and multi-purpose library that can change the way people write [entire apps][groceryList-github], but you can also use it sparingly where it fits the task.
+Se você se encontrar em um callback infernal, de uma olhada em [ReactiveCocoa (RAC)][reactivecocoa-github]. É uma biblioteca multiuso versátil e que pode mudar a maneira que as pessoas escrevem [total apps][groceryList-github], mas você também pode usá-lo com moderação onde ele se encaixa na tarefa.
 
-There are good introductions to the concept of RAC (and FRP in general) on [Teehan+Lax][teehan-lax-rac] and [NSHipster][nshipster-rac].
+Há boas instroduções para o conceito de RAC (e FRP em geral) em [Teehan+Lax][teehan-lax-rac] and [NSHipster][nshipster-rac].
 
 [grocerylist-github]: https://github.com/jspahrsummers/GroceryList
 [teehan-lax-rac]: http://www.teehanlax.com/blog/getting-started-with-reactivecocoa/
@@ -273,17 +275,17 @@ There are good introductions to the concept of RAC (and FRP in general) on [Teeh
 ];
 ```
 
-This allows us to transform or filter gigs before showing them, by combining the gig signal with other signals.
+Isso nos permite transformar ou filtrar apresentações antes de mostrar em seguida, combinando o sinal de atuação com outros sinais.
 
 ## Assets
 
-[Asset catalogs][asset-catalogs] are the best way to manage all your project's visual assets. They can hold both universal and device-specific (iPhone 4-inch, iPhone Retina, iPad, etc.) assets and will automatically serve the correct ones for a given name. Teaching your designer(s) how to add and commit things there (Xcode has its own built-in Git client) can save a lot of time that would otherwise be spent copying stuff from emails or other channels to the codebase. It also allows them to instantly try out their changes and iterate if needed.
+[Catalogo de Asset ][asset-catalogs] são as melhores maneiras de gerencias todos seu projeto de visual assets. Eles podem manter igualmente universair em devices especificos (iPhone 4-polegadas, iPhone Retina, iPad, etc.) assets and will automatically serve the correct ones for a given name. Ensine seu designer como adicionar e da comite em coisas lá                                                         (Xcode has its own built-in Git client) can save a lot of time that would otherwise be spent copying stuff from emails or other channels to the codebase. It also allows them to instantly try out their changes and iterate if needed.
 
 [asset-catalogs]: https://developer.apple.com/library/ios/recipes/xcode_help-image_catalog-1.0/Recipe.html
 
-### Using Bitmap Images
+### Usando imagens bitmap
 
-Asset catalogs expose only the names of image sets, abstracting away the actual file names within the set. This nicely prevents asset name conflicts, as files such as `button_large@2x.png` are now namespaced inside their image sets. However, some discipline when naming assets can make life easier:
+Catálogos de assets expõe apenas os nomes de conjuntos de imagens, abstraindo os nomes de arquivos reais dentro do conjunto. Este bem impede conflitos de nomes de assets, como arquivos "button_large@2x.png" são agora namespaced dentro de conjuntos de imagens. Entretanto, alguma intrução na nomeação dos assets torna a vida mais fácil:
 
 ```objective-c
 IconCheckmarkHighlighted.png // Universal, non-Retina
@@ -295,37 +297,37 @@ IconCheckmarkHighlighted~ipad.png // iPad, non-Retina
 IconCheckmarkHighlighted@2x~ipad.png // iPad, Retina
 ```
 
-The modifiers `-568h`, `@2x`, `~iphone` and `~ipad` are not required per se, but having them in the file name when dragging the file to an image set will automatically place them in the right "slot", thereby preventing assignment mistakes that can be hard to hunt down.
+Os modificadores `-568h`, `@2x`, `~iphone` e `~ipad` are not required per se, but having them in the file name when dragging the file to an image set will automatically place them in the right "slot", thereby preventing assignment mistakes that can be hard to hunt down.
 
-### Using Vector Images
+### Usando imagens Vetores
 
-You can include the original [vector graphics (PDFs)][vector-assets] produced by designers into the asset catalogs, and have Xcode automatically generate the bitmaps from that. This reduces the complexity of your project (the number of files to manage.)
+Você pode incluir o original [Vetores gráficos (PDFs)][vector-assets] produzido por designers dentro dos catálogos de asset, e tem o Xcode que automaticamente gera um bitmap a partir dele. Este reduz a complexidade do seu projeto  (o número de arquivos gerenciáveis)
 
 [vector-assets]: http://martiancraft.com/blog/2014/09/vector-images-xcode6/
 
-## Coding Style
+## Estilo de Código
 
-### Naming
+### Nomenclatura
 
-Apple pays great attention to keeping naming consistent, if sometimes a bit verbose, throughout their APIs. When developing for Cocoa, you make it much easier for new people to join the project if you follow [Apple's naming conventions][cocoa-coding-guidelines].
+Apple presta bastante atenção na consistencia da nomenclatura, algumas vezes um pouco verboso, ao longo de suas API's. Quando deselvove para Cocoa, torna isso mais fácil para novas pessoas que se juntam a você para um novo projeto [Apple's naming conventions][cocoa-coding-guidelines].
 
 [cocoa-coding-guidelines]: https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/CodingGuidelines/CodingGuidelines.html
 
-Here are some basic takeaways you can start using right away:
+Aqui está algumas dicas para voce começar a usar do modo certo:
 
-A method beginning with a _verb_ indicates that it performs some side effects, but won't return anything:
+Um metodo começando com um _verb_ indica que ele executa alguns efeitos colaterais, mas não retorna nada:
 `- (void)loadView;`
 `- (void)startAnimating;`
 
-Any method starting with a _noun_, however, returns that object and should do so without side effects:
+Qualquer metodo que começa com um _noun_, porém, retorna sem efeitos colaterais:
 `- (UINavigationItem *)navigationItem;`
 `+ (UILabel *)labelWithText:(NSString *)text;`
 
-It pays off to keep these two as separated as possible, i.e. not perform side effects when you transform data, and vice versa. That will keep your side effects contained to smaller sections of the code, which makes it more understandable and facilitates debugging.
+Vale a pena manter esses dois separados quando possível, i.e. não representa efeito colcatral wuando transforma data , e vice versa. Isso irá manter seus efeitos colaterais contido para seções menores do código, o que torna o mais compreensível e facilita na debugação.
 
-### Structure
+### Estrutura (Structure)
 
-[Pragma marks](http://nshipster.com/pragma/) are a great way to group your methods, especially in view controllers. Here is a common structure that works with almost any view controller:
+[Pragma marks](http://nshipster.com/pragma/) é uma grande maneira para seu grupo de metodos, especialmente uma view controller. Aqui é comum uma estrutura trabalhar com quase qualquer view controller:
 
 ```objective-c
 
@@ -381,11 +383,11 @@ static CGFloat const XYZFooFloatConstant = 1234.5;
 @end
 ```
 
-The most important point is to keep these consistent across your project's classes.
+O mais importante é quando mantém a consistência para cruzar classes em seu projeto .
 
 ### External Style Guides
 
-Futurice does not have company-level guidelines for coding style. It can however be useful to peruse the Objective-C style guides of other development shops, even if some bits can be quite company-specific or opinionated:
+Futurice não tem diretrizes de nível-empresa para estilo de codificação. No entanto ele pode ser útil para ler a guide style do Objective-C de outras lojas de desenvolvimento, mesmo que alguns pedaços podem ser bastante específicos da empresa:
 
 * [GitHub](https://github.com/github/objective-c-style-guide)
 * [Google](http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml)
@@ -394,69 +396,69 @@ Futurice does not have company-level guidelines for coding style. It can however
 * [Sam Soffes](https://gist.github.com/soffes/812796)
 * [Luke Redpath](http://lukeredpath.co.uk/blog/2011/06/28/my-objective-c-style-guide/)
 
-## Diagnostics
+## Diagnosticos (Diagnostics)
 
-### Compiler warnings
+### Problemas de compilação 
 
-It is recommended that you enable as many compiler warnings as possible, and treat warnings as errors. This recommendation is justified in [these presentation slides][warnings-slides]. The slides also contain information on how to suppress certain warnings in specific files, or in specific sections of code.
+É recomendado que você permita o maior número possível de avisos ao compilador, e tratar avisos de erro. essa recomendação é justificada em [Nessa representação de slides][warnings-slides]. Os slides The slides também contém informação sobre como conter certas advertências em arquivos específicos, ou em sessões especificas de código.
 
-In short, add at least these values to the _“Other Warning Flags”_ build setting:
+Em resumo, adicionar pelo menos estes valores para o _“Other Warning Flags”_ para construir definições :
 
 - `-Wall` _(Enables lots of additional warnings)_
 - `-Wextra` _(Enables more additional warnings)_
 
-Also enable the _“Treat warnings as errors”_ build setting.
+Também permite o  _“Treat warnings as errors”_ para construir definições.
 
 [warnings-slides]: https://speakerdeck.com/hasseg/the-compiler-is-your-friend
 
-### Clang Static Analyzer
+### Analista estático Clang (Clang Static Analyzer)
 
-The Clang compiler (which Xcode uses) has a _static analyzer_ that performs control and data flow analysis on your code and checks for lots of errors that the compiler cannot.
+O compilador clang (usando o Xcode) tem um _analista stático_ esse controla performance e fluxo de analise de data em seu código e verifica a existência de muitos erros que o compilador não pode. 
 
-You can manually run the analyzer from the _Product → Analyze_ menu item in Xcode.
+Você pode manualmente inicia analise no _Product → Analyze_ item no menu do Xcode.
 
-The analyzer can work in either “shallow” or “deep” mode. The latter is much slower but may find more issues due to cross-function control and data flow analysis.
+O analista pode trabalhar em qualquer modo “raso"(shallow) ou modo “profundo”(deep). O último é muito mais lento, mas pode encontrar mais issues adequados para cruzar funções de controle e fluxo de analise de data.
 
-Recommendations:
+Recomendações:
 
-- Enable _all_ of the checks in the analyzer (by enabling all of the options in the “Static Analyzer” build setting sections)
-- Enable the _“Analyze during ‘Build’”_ build setting for your release build configuration to have the analyzer run automatically during release builds. (Seriously, do this — you’re not going to remember to run it manually.)
-- Set the _“Mode of Analysis for ‘Analyze’”_ build setting to _Shallow (faster)_
-- Set the _“Mode of Analysis for ‘Build’”_ build setting to _Deep_
+- Permite _todos_ de verificar no analizador (por permissão todos as opções no "Static Analizer" são definidas na sessão build.)
+- Permitir a _“Analise durante a ‘Build’”_ definir a build para lançar a configuração da build para o analisador executar automaticamente durante a compilação. (Seriamente, fazer isso — você não vai lembrar de rodar isso manualmente .)
+- Acionar o _“Modo de Análise para ‘Analyze’”_ construir a configuração _Shallow (faster)_
+- Acionar o _“Modo de Análise para ‘Build’”_ construir a configuração _Deep_
 
 ### [Faux Pas](http://fauxpasapp.com/)
 
-Created by our very own [Ali Rantakari][ali-rantakari-twitter], Faux Pas is a fabulous static error detection tool. It analyzes your codebase and finds issues you had no idea even existed. Be sure to run this before shipping any iOS (or Mac) app!
+Criado por nós [Ali Rantakari][ali-rantakari-twitter], Faux Pas é uma fabulosa ferramente de detecção de erro estática. Ele analiza seu código fonte e encontra issues (questões) que você não tinha ideia que existia. Certifique-se de executar antes de enviar para qualquer app iOS (or Mac)!
 
-_(Note: all Futurice employees get a free license to this — just ask Ali.)_
+_(Nota: Todos os funcionários da Futurice obtem uma licença livre para isso — basta perguntar Ali.)_
 
 [ali-rantakari-twitter]: https://twitter.com/AliRantakari
 
-### Debugging
+### Debugando (Debugging)
 
-When your app crashes, Xcode does not break into the debugger by default. To achieve this, add an exception breakpoint (click the "+" at the bottom of Xcode's Debug Navigator) to halt execution whenever an exception is raised. In many cases, you will then see the line of code responsible for the exception. This catches any exception, even handled ones. If Xcode keeps breaking on benign exceptions in third party libraries e.g., you might be able to mitigate this by choosing _Edit Breakpoint_ and setting the _Exception_ drop-down to _Objective-C_.
+Quando seu app crashes, Xcode não introduz no debugger por padrão. Para efetuar isso, adicione um exceção de breakpoint (clique no "+" no botão de Navigator Debug do Xcode) para parar a execução quando uma exceção é gerada. Em muitos casos, você vai ver a linha do código responsável pela exceção. Este captura qualquer exceção, mesmo os tratados. Xcode se mantém favorável na quebra de exceções na librarie de terceiros e.g., você pode ser capaz de suavizar isso escolhendo _Edit Breakpoint_ e definindo o _Exception_ drop-down para o _Objective-C_.
 
-For view debugging, [Reveal][reveal] and [Spark Inspector][spark-inspector] are two powerful visual inspectors that can save you hours of time, especially if you're using Auto Layout and want to locate views that are collapsed or off-screen. Granted, Xcode offers [something very similar][xcode-view-debugging] for free, but it's iOS 8+ only and feels somewhat less polished.
+Para debugar a view, [Reveal][reveal] e [Spark Inspector][spark-inspector] são dois verificadores poderosos que você pode salvar horas do seu tempo, especialmente se você estiver usando Auto Layout e precisar localizar uma view que quebrou ou que está fora da tela. Permitindo, Xcode oferece [algo bem similar][xcode-view-debugging] de graça, mas é iOS 8+ único que se sente um pouco menos polido.
 
 [reveal]: http://revealapp.com/
 [spark-inspector]: http://sparkinspector.com
 [xcode-view-debugging]: https://developer.apple.com/library/ios/recipes/xcode_help-debugger/using_view_debugger/using_view_debugger.html
 
-### Profiling
+### (Perfil) Profiling
 
-Xcode comes with a profiling suite called Instruments. It contains a myriad of tools for profiling memory usage, CPU, network communications, graphics and much more. It's a complex beast, but one of its more straight-forward use cases is tracking down memory leaks with the Allocations instrument. Simply choose _Product_ > _Profile_ in Xcode, select the Allocations instrument, hit the Record button and filter the Allocation Summary on some useful string, like the prefix of your own app's class names. The count in the Persistent column then tells you how many instances of each object you have. Any class for which the instance count increases indiscriminately indicates a memory leak.
+Xcode vem com um conjunto de perfis chamado Instruments. Ele contém uma infinidade de ferramentas para perfis de uso de memória, CPU, comunicação com a rede, gráficos e muito mais. É uma besta complexa, mas um dos seus extras straight-forward casos de uso é rastrear vazamentos de memória com Allocations instrument. Simples escolha _Product_ > _Profile_ no Xcode, selecione a Allocation instrument, aperte o botão de Record para filtrar o resumo da Allocation em alguma string útil, como o prefixo do nome da sua própria classe. A contagem que persiste na coluna diz quantos instâncias de cada objeto você tem. Qualquer classe para qual a contagem de instância aumenta indiscriminadamente indica o vazamento de memória.
 
-Also good to know is that Instruments has an Automation tool for recording and playing back UI interactions as JavaScript files. [UI Auto Monkey][ui-auto-monkey] is a script that will use Automation to randomly pummel your app with taps, swipes and rotations which can be useful for stress/soak testing.
+Também é bom saber se está Instruments tem uma ferramenta de Automation para gravação e reprodução de interação UI como arquivos Javascript. [UI Auto Monkey][ui-auto-monkey] é um script que usará a Automation para sofrer toques aleatorios no seu app, pancadas e rotação pode ser útil para teste de stress/pancada (swipes and rotations which can be useful for stress/soak testing.)
 
 [ui-auto-monkey]: https://github.com/jonathanpenn/ui-auto-monkey
 
 ## Analytics
 
-Including some analytics framework in your app is strongly recommended, as it allows you to gain insights on how people actually use it. Does feature X add value? Is button Y too hard to find? To answer these, you can send events, timings and other measurable information to a service that aggregates and visualizes them – for instance, [Google Tag Manager][google-tag-manager]. The latter is more versatile than Google Analytics in that it inserts a data layer between app and Analytics, so that the data logic can be modified through a web service without having to update the app.
+Incluir alguma análise de framework em seu app é altamente recomendado, um que lhe permita obter insights sobre como as pessoas realmente usam isso. Faz o recurso X adicionar valor? O button Y é difícil de encontrar? Para responder isso, você tem que enviar eventos, cronometrando e mensurando outras informações para um serviço que agrega ao visualiza-lo – para instância, [Google Tag Manager (gerenciador de marcação do google) ][google-tag-manager]. O último é mais versátil do que o Google Analytics em que se insere uma camada de dados entre o aplicativo e o Analytics, então essa lógica dos dados podem ser modificados através de um serviço web sem ter que atualizar o aplicativo.
 
 [google-tag-manager]: http://www.google.com/tagmanager/
 
-A good practice is to create a slim helper class, e.g. `XYZAnalyticsHelper`, that handles the translation from app-internal models and data formats (XYZModel, NSTimeInterval, …) to the mostly string-based data layer:
+Uma boa prática é criar uma pequena classe auxiliar, e.g. "XYZAnalyticsHelper", que lida com a tradução a partir de modelos de aplicativos modelos e formatos de dados(XYZModel, NSTimeInterval, …) para principalmente camada de dado baseada por string:
 
 ```objective-c
 
@@ -473,11 +475,11 @@ A good practice is to create a slim helper class, e.g. `XYZAnalyticsHelper`, tha
 
 ```
 
-This has the additional advantage of allowing you to swap out the entire Analytics framework behind the scenes if needed, without the rest of the app noticing.
+Isto tem uma vantagem adicional permite que você troque todo framework do Analytics por trás se necessário, sem o resto do aplicativo perceber.
 
-### Crash Logs
+### Logs de Crash (Crash Logs)
 
-First you should make your app send crash logs onto a server somewhere so that you can access them. You can implement this manually (using [PLCrashReporter][plcrashreporter] and your own backend) but it’s recommended that you use an existing service instead — for example one of the following:
+Primeiramente você deve fazer o seu aplicativo enviar logs de crash para um servidor em algum lugar para que você possa acessá-lo. Você pode implantar isso manualmente (Usando [PLCrashReporter][plcrashreporter] em seu próprio backend) Mas é recomendado que você use um serviço existente, por exemplo um dos seguintes procedimentos:
 
 * [Crashlytics](http://www.crashlytics.com)
 * [HockeyApp](http://hockeyapp.net)
@@ -486,42 +488,42 @@ First you should make your app send crash logs onto a server somewhere so that y
 
 [plcrashreporter]: https://www.plcrashreporter.org
 
-Once you have this set up, ensure that you _save the Xcode archive (`.xcarchive`)_ of every build you release. The archive contains the built app binary and the debug symbols (`dSYM`) which you will need to symbolicate crash reports from that particular version of your app.
+Depois de ter configurado, garanta que você salve o arquivo Xcode (".xcarchive")_  em cada build que você lance. O arquivo contém o build do aplicativo binario e simbolos de debug ("dSYM") que você precisará simbolizar os reports de crash dessa versão particular do aplicativo.
 
 
-## Building
+## Building (Definição)
 
-### Build Configurations
+### Build Configurations (Configuração de build)
 
-Even simple apps can be built in different ways. The most basic separation that Xcode gives you is that between _debug_ and _release_ builds. For the latter, there is a lot more optimization going on at compile time, at the expense of debugging possibilities. Apple suggests that you use the _debug_ build configuration for development, and create your App Store packages using the _release_ build configuration. This is codified in the default scheme (the dropdown next to the Play and Stop buttons in Xcode), which commands that _debug_ be used for Run and _release_ for Archive.
+Mesmo simples aplicativos podem buildar de maneiras diferentes. A mais básica separação que o Xcode lhe dá é entre _debug_ e _release_ builds. Para a última, há muito mais otimização acontecendo em tempo de compilação, à custa da possibilidade da depuração (Debug). Apple sugestiona que você use o _debug_ build configuration para desenvolvedores, e crie seu pacote App Store usando o _release_ build configuration. Essa é codificada no esquema padrão (O menu suspenso ao lado dos botões Play e Stop no Xcode), qual o comando que o _debug_ pode ser utilizado para executar e arquivar a _release_.
 
-However, this is a bit too simple for real-world applications. You might – no, [_should!_][futurice-environments] – have different environments for testing, staging and other activities related to your service. Each might have its own base URL, log level, bundle identifier (so you can install them side-by-side), provisioning profile and so on. Therefore a simple debug/release distinction won't cut it. You can add more build configurations on the "Info" tab of your project settings in Xcode.
+Entretanto, isso é uma pouco simples demais para aplicação do mundo real. Você pode – , [_deveria!_][futurice-environments] – ter diferentes ambientes pra teste, staging e outras atividades relacionadas ao seu serviço. cada um pode ter sua base de URL, level de log, identificador de bundle (Então você pode instalar ele side-by-side), provisionando um perfil e etc.. Portanto uma distinção simples de debug/release não vai corta-la. Você pode adicionar mais configurações de build na tab "info" das definições de seu projeto no Xcode.
 
 [futurice-environments]: https://blog.futurice.com/five-environments-you-cannot-develop-without
 
-#### `xcconfig` files for build settings
+#### "xcconfig" arquivos para definições de build 
 
-Typically build settings are specified in the Xcode GUI, but you can also use _configuration settings files_ (“`.xcconfig` files”) for them. The benefits of using these are:
+Tipicamente a definição de build é especificada no GUI do Xcode, mas você pode também usar _configuration settings files_ (“'.xcconfig' files”) para então. The benefits of using these are:
 
-- You can add comments to explain things
-- You can `#include` other build settings files, which helps you avoid repeating yourself:
-    - If you have some settings that apply to all build configurations, add a `Common.xcconfig` and `#include` it in all the other files
-    - If you e.g. want to have a “Debug” build configuration that enables compiler optimizations, you can just `#include "MyApp_Debug.xcconfig"` and override one of the settings
-- Conflict resolution and merging becomes easier
+- Você pode adicionar comentários para explicar as coisas 
+- Você pode `#include` outra definição de arquivo build, o que ajuda a evitar a repetição de si mesmo:
+    - Se você tem alguma definição que se aplica à todas as definições de build, Adicione um `Common.xcconfig` e `#include` isso em todos os outros arquivos
+    - Se você quer ter um “Debug” de definição habilitada build nas optimizações do compilador, você pode apenas adicionar `#include "MyApp_Debug.xcconfig"` e substituir um dos ajustes.
+-  Resolução de conflitos e merging se torna mais fácil.
 
-Find more information about this topic in [these presentation slides][xcconfig-slides].
+Enconte mais informação sobre esse tópico em [ Estas representações de slides][xcconfig-slides].
 
 [xcconfig-slides]: https://speakerdeck.com/hasseg/xcode-configuration-files
 
-### Targets
+### Targets 
 
-A target resides conceptually below the project level, i.e. a project can have several targets that may override its project settings. Roughly, each target corresponds to "an app" within the context of your codebase. For instance, you could have country-specific apps (built from the same codebase) for different countries' App Stores. Each of these will need development/staging/release builds, so it's better to handle those through build configurations, not targets. It's not uncommon at all for an app to only have a single target.
+Um target reside conceitualmente abaixo do nível do projeto, i.e. um projeto pode ter targets severos que podem substituir suas configuraçoes de projeto. Grosseiramente,  cada target corresponde a "um aplicativo" dentro do contexto do seu código fonte. Por exemplo, voce poderia ter aplicaçoes especificas de cada país (construido apartir do mesmo código fonte) para diferentes paises' App Stores. Cada uma delas terá development/staging/release builds, Por isso é melhor para lidar com aquelas da definição da build, nem targets. Não é incomum em todo um aplicativo ter uma única target.
 
-### Schemes
+### Esquemas (Schemes) 
 
-Schemes tell Xcode what should happen when you hit the Run, Test, Profile, Analyze or Archive action. Basically, they map each of these actions to a target and a build configuration. You can also pass launch arguments, such as the language the app should run in (handy for testing your localizations!) or set some diagnostic flags for debugging.
+ Esquemas (Schemes) diz ao Xcode o que deveria acontecer quando se inicia , (Teste) Test, (Perfil) Profile, (Análise ou ação de arquivo) Analyze or Archive action. Basicamente, eles mapeam cada uma dessas ações para a configuração da build. Voce também pode passar argumentos de lançamento, tais como o idioma do aplicativo que deve ser executado em (útil para testar sua localização!) ou definir algumas flags para diagnostico de depuração(Debbuger).
 
-A suggested naming convention for schemes is `MyApp (<Language>) [Environment]`:
+Uma sugestão de nomeamento convencional para esquemas é "MyApp (<Language>) [Environment]"  ("MyApp (<Linguagem) [Ambiente]") :
 
     MyApp (English) [Development]
     MyApp (German) [Development]
@@ -529,63 +531,63 @@ A suggested naming convention for schemes is `MyApp (<Language>) [Environment]`:
     MyApp [Staging]
     MyApp [App Store]
 
-For most environments the language is not needed, as the app will probably be installed through other means than Xcode, e.g. TestFlight, and the launch argument thus be ignored anyway. In that case, the device language should be set manually to test localization.
+Para maioria dos ambientes a lingua não é necessária, como o aplicativo provalvemente será instalado a partir de outros meios do Xcode, e.g. teste de lançamento, e o argumento de lançamento pode ser ignorado de qualquer maneira. Nesse caso, e o idioma do dispositivo deve ser definido manualmente para teste de localização.
 
-## Deployment
+## Deployment (Implantação)
 
-Deploying software on iOS devices isn't exactly straightforward. That being said, here are some central concepts that, once understood, will help you tremendously with it.
+Implantação (deployment) de software nos dispositivos iOS não é exatamente simples. That being said, aqui estão conceitos centrais que, umas vez entendido, irá ajuda-lo tremendamente com isto.
 
-### Signing
+### Signing (Assinatura)
 
-Whenever you want to run software on an actual device (as opposed to the simulator), you will need to sign your build with a __certificate__ issued by Apple. Each certificate is linked to a private/public keypair, the private half of which resides in your Mac's Keychain. There are two types of certificates:
+Sempre que você deseja executar o software em um dispositivo real (ao contrário do simulador), voce terá que assinar sua compilação com um __certificado__ emitido pela Apple.Cada certificado é ligado para uma par de chave privada/publica , a metade privada que reside em seu keychain do Mac. Há dois tipos de certificados:
 
-* __Development certificate:__ Every developer on a team has their own, and it is generated upon request. Xcode might do this for you, but it's better not to press the magic "Fix issue" button and understand what is actually going on. This certificate is needed to deploy development builds to devices.
-* __Distribution certificate:__ There can be several, but it's best to keep it to one per organization, and share its associated key through some internal channel. This certificate is needed to ship to the App Store, or your organization's internal "enterprise app store".
+* __Certificado de desenvolvimento:__ Cada desenvolvedor em uma equipe tem seu próprio, em que é gerado o pedido. Xcode pode fazer isso por voce, mas é melhor para não pressionar o botão magico "fix issue" e entender o que exatamente está ocorrendo. Este certificado é necessário para o desenvolvedor implantar builds para os devices.
+* __Distribuição de certificado:__ Pode haver vários, mas é melhor mante-lo para uma organização, e compartilhar sua chave associada através de um canal interno. Este certificado é necessário para enviar para a App Store, ou sua organização interna "enterprise app store".
 
-### Provisioning
+### Provisioning (Provisionamento)
 
-Besides certificates, there are also __provisioning profiles__, which are basically the missing link between devices and certificates. Again, there are two types to distinguish between development and distribution purposes:
+Além de certificados, há também __provisioning profiles__, Que são basicamente o elo perdido entre o device e o certificado. Novamente, Existem dois tipos diferentes entre fins de desenvolvimento e distribuição:
 
-* __Development provisioning profile:__ It contains a list of all devices that are authorized to install and run the software. It is also linked to one or more development certificates, one for each developer that is allowed to use the profile. The profile can be tied to a specific app or use a wildcard App ID (*). The latter is [discouraged][jared-sinclair-signing-tips], because Xcode is notoriously bad at picking the correct files for signing unless guided in the right direction. Also, certain capabilities like Push Notifications or App Groups require an explicit App ID.
+* __ (perfil de provisionamento de desenvolvimento) Development provisioning profile:__ Ele contém uma lista de todos os dipositivos que estão autorizados a instalar e executar o software. Ela também é ligada a um ou mais certificados de desenvolvimento, um para cada desenvolvedor que tem permissão para utilizar o perfil. O profile dele pode ser vinculado a um aplicativo específico ou usar wildcard no ID do aplicativo (*). O último é [discouraged][jared-sinclair-signing-tips], porque o Xcode é notoriamente ruim em escolher os arquivos corretos para assinatura a menos que guie na direção certa. Também, certos recursos como Push Notification ou App Groups exijam explicitamente o ID do App.
 
-* __Distribution provisioning profile:__ There are three different ways of distribution, each for a different use case. Each distribution profile is linked to a distribution certificate, and will be invalid when the certificate expires.
-    * __Ad-Hoc:__ Just like development profiles, it contains a whitelist of devices the app can be installed to. This type of profile can be used for beta testing on 100 devices per year. For a smoother experience and up to 1000 distinct users, you can use Apple's newly acquired [TestFlight][testflight] service. Supertop offers a good [summary of its advantages and issues][testflight-discussion].
-    * __App Store:__ This profile has no list of allowed devices, as anyone can install it through Apple's official distribution channel. This profile is required for all App Store releases.
-    * __Enterprise:__ Just like App Store, there is no device whitelist, and the app can be installed by anyone with access to the enterprise's internal "app store", which can be just a website with links. This profile is available only on Enterprise accounts.
+* __Distribuição de perfil provisionado:__ Há diferentes maneiras de distribuição, para uso em cada caso diferente. Cada distribuição de perfil é ligado a uma distribuição certificada, e será inváido quando o certificado exprirar.
+    * __Ad-Hoc:__ Assim como perfis de desenvolvimento, ele contém uma lista branca de dispositivos e aplicação que pode ser instalada para este tipo de perfil, que pode ser usado em testes betas em 100 dispositivos por ano. Para uma experiencia mais suave em até 100 usuários distintos, voce pode usar a recém adquirido serviço da Apple +[TestFlight][testflight]. Supertop oferece uma boa [summary of its advantages and issues][testflight-discussion].
+    * __App Store:__ Este perfil não tem lista de dispositivos permitidos, como qualquer pessoa pode instala-la através do canal de distribuição oficial da Apple. Esse perfil é requerido para todos os lançamentos da Apple Store.
+    * __Enterprise:__ Assim como App Store, não há lista branca de devices, e o aplicativo pode ser instalado por qualquer pessoa com acesso interno da conta da empresa na "App Store", que pode ser apenas um link de site . Esse perfil é disponível apenas em contas Enterprise.
 
 [jared-sinclair-signing-tips]: http://blog.jaredsinclair.com/post/116436789850/
 [testflight]: https://developer.apple.com/testflight/
 [testflight-discussion]: http://blog.supertop.co/post/108759935377/app-developer-friends-try-testflight
 
-To sync all certificates and profiles to your machine, go to Accounts in Xcode's Preferences, add your Apple ID if needed, and double-click your team name. There is a refresh button at the bottom, but sometimes you just need to restart Xcode to make everything show up.
+Para sincronizar todos os certificados e perfis em sua maquina, vá para Accounts nas preferencias do Xcode, adicione seu ID da Apple se precisar, e de um clique-duplo no nome de sua equipe. Há um botão de atualização na parte inferior, mas algumas voce voce apenas precisara reinicializar o Xcode para mostra tudo.
 
-#### Debugging Provisioning
+#### Debugging Provisioning (Provisionamento de depuração)
 
-Sometimes you need to debug a provisioning issue. For instance, Xcode may refuse to install the build to an attached device, because the latter is not on the (development or ad-hoc) profile's device list. In those cases, you can use Craig Hockenberry's excellent [Provisioning][provisioning] plugin by browsing to `~/Library/MobileDevice/Provisioning Profiles`, selecting a `.mobileprovision` file and hitting Space to launch Finder's Quick Look feature. It will show you a wealth of information such as devices, entitlements, certificates, and the App ID.
+Algumas vezes voce precisara debugar os issues de provisionamento. Por exemplo, o Xcode pode se recusar a instalar a compilação em um dispositivo conectado, por causa do último ser (development or ad-hoc) um perfil na lista . Nestes casos, voce pode usar a excelencia Craig Hockenberry[Provisioning][provisioning] plugin navegando para  `~/Library/MobileDevice/Provisioning Profiles`, selecionando um arquivo `.mobileprovision` e apertando space para iniciar a caracteristica do Quick Look do Finder. Ele ira mostrar-lhe uma riqueza de informações, tais como dispositivos, direitos, certificados, e ID do aplicativo.
 
 [provisioning]: https://github.com/chockenberry/Provisioning
 
 ### Uploading
 
-[iTunes Connect][itunes-connect] is Apple's portal for managing your apps on the App Store. To upload a build, Xcode 6 requires an Apple ID that is part of the developer account used for signing. This can make things tricky when you are part of several developer accounts and want to upload their apps, as for mysterious reasons _any given Apple ID can only be associated with a single iTunes Connect account_. One workaround is to create a new Apple ID for each iTunes Connect account you need to be part of, and use Application Loader instead of Xcode to upload the builds. That effectively decouples the building and signing process from the upload of the resulting `.app` file.
+[iTunes Connect][itunes-connect] é um portal da Apple para gerenciar seus aplicativos na App Store. Para subir uma build, Xcode 6 requer um ID da Apple, isso faz parte da assinatura da conta do desenvolvedor. Isso pode tornar as coisas complicadas quando voce é parte de várias contas de desenvolvedores e quer fazer upload de aplicativos, por razões misteriosas qualquer ID da Apple só pode ser associada a uma única conta do iTunes Connect. Única solução alternativa é criar uma nova ID da Apple para cada conta da iTunes Connect voce precisa ser parte, e usar a Loader Application em vez do Xcode para subir a build.  Que efetivamente separa o processo de construção e assinatura do carregamento do resultante do arquivo do ".app".
 
-After uploading the build, be patient as it can take up to an hour for it to show up under the Builds section of your app version. When it appears, you can link it to the app version and submit your app for review.
+Depois de subir o build, seja paciente pois pode levar até uma hora para aparecer na seção da Build do seu aplicativo. Quando aparecer, voce pode vincular para a versão do aplicativo e enviar o seu aplicativo para revisão.
 
 [itunes-connect]: https://itunesconnect.apple.com
 
-## In-App Purchases (IAP)
+## In-App Compras (IAP)
 
-When validating in-app purchase receipts, remember to perform the following checks:
+Ao validar recibos de compra no in-app, lembre-se de fazer os seguintes comandos:
 
-- __Authenticity:__ That the receipt comes from Apple
-- __Integrity:__ That the receipt has not been tampered with
-- __App match:__ That the app bundle ID in the receipt matches your app’s bundle identifier
-- __Product match:__ That the product ID in the receipt matches your expected product identifier
-- __Freshness:__ That you haven’t seen the same receipt ID before.
+- __Authenticity:__ Que o recebimento vem da Apple
+- __Integrity:__ Que o recibo não foi adulterado 
+- __App match:__ Que o recebimento do bundle ID do aplicativo corresponde ao seu bundle identifier do aplicativo
+- __Product match:__ Que o ID do produto no recebimento corresponde ao seu identificador do produto esperado
+- __Freshness:__ Que voce não tenha visto o mesmo rebido do ID antes.
 
-Whenever possible, design your IAP system to store the content for sale server-side, and provide it to the client only in exchange for a valid receipt that passes all of the above checks. This kind of a design thwarts common piracy mechanisms, and — since the validation is performed on the server — allows you to use Apple’s HTTP receipt validation service instead of interpreting the receipt `PKCS #7` / `ASN.1` format yourself.
+Sempre que possível,  projete seu sistema de IAP ( Inn-app) para armazenar o conteúdo para a venda do lado do servidor, e forneça para o cliente apenas em troca de um recibo válido que passa as verificações acima. Este tipo de projeto frusta mecanismos comuns de pirataria , e —  desde a validação é performada no servidor — permite voce de usar    Serviço de Recebimento  HTTP de validação da Apple como alternativa de interpretar o recibo  `PKCS #7` / `ASN.1` formato próprio.
 
-For more information on this topic, check out the [Futurice blog: Validating in-app purchases in your iOS app][futu-blog-iap].
+Para mais informação neste tópico, veja a [Futurice blog: Validando uma compra pelo inn-app no seu aplicativo iOS][futu-blog-iap].
 
 [futu-blog-iap]: http://futurice.com/blog/validating-in-app-purchases-in-your-ios-app
 
@@ -596,12 +598,13 @@ For more information on this topic, check out the [Futurice blog: Validating in-
 [futurice]: http://www.futurice.com
 
 
-## More Ideas
+## Mais Ideias
 
-- 3x assets, iPhone 6 screen sizes explained
-- Add list of suggested compiler warnings
-- Ask IT about automated Jenkins build machine
-- Add section on Testing
-- Add "proven don'ts"
+- 3x assets, tamanho da tela do iPhone 6 
+- Adicionar lista de sugestões no alerta do compilador 
+- Pergunte sobre IT automatizando maquinas de compilação Jenkins 
+- Adicionar seção sobre Testes
+- Adicionar "não comprovados "
+
 
 [reactivecocoa-github]: https://github.com/ReactiveCocoa/ReactiveCocoa
